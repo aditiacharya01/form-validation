@@ -9,6 +9,8 @@ import { roles } from "../constants/UserConstant";
 import { useAppDispatch } from "../hooks/user.hooks";
 import { inviteUsers } from "../store/user-actions";
 import styled from "styled-components";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import Icon from "../atoms/Icon";
 
 const StyledWrapper = styled.div`
   margin: auto;
@@ -94,7 +96,7 @@ const MemberForm: FC = () => {
                                   onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
                                   data-testid={`remove-button-${index}`}
                                 >
-                                  -
+                                  <Icon icon={faTrash} />
                                 </button>
                               </StyledContainer>
                             </StyledWrapper>
