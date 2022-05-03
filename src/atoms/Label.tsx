@@ -4,6 +4,8 @@ import LabelProps from "../interfaces/Label.types";
 
 const StyledLabel = styled.label<LabelProps>`
   display: block;
+  font-weight: 500;
+  margin-bottom: 8px;
 `;
 
 const Label: FC<LabelProps> = ({ label }) => (

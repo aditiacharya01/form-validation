@@ -10,6 +10,7 @@ const StyledLabel = styled.div<IconProps>`
   font-size: 20px;
   font-weight: 500;
   display: block;
+  color: #5e5858;
 `;
 
 const Icon: FC<IconProps> = ({ icon }) => {

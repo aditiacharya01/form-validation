@@ -25,6 +25,18 @@ const StyledContainer = styled.div`
   text-align: left;
 `;
 
+const StyledButton = styled.button`
+  border: none;
+  background: transparent;
+  margin-top: 26px;
+`;
+
+const StyledErrorMessage = styled.div`
+  color: #e91f1f;
+  font-size: 14px;
+  margin-top: 6px;
+`;
+
 const MemberForm: FC = () => {
   const dispatch = useAppDispatch();
   const [addedState, setAddedState] = useState("");
@@ -45,10 +57,10 @@ const MemberForm: FC = () => {
             .of(
               Yup.object().shape({
                 email: Yup.string()
-                  .required("email required")
+                  .required("Field can't be empty")
                   .email("Enter valid email"),
                 role: Yup.string()
-                  .required("role required")
+                  .required("Field can't be empty")
                   .oneOf(roles, "The role you chose does not exist"),
               })
             )
@@ -80,7 +92,11 @@ const MemberForm: FC = () => {
                                     label="Email"
                                     id={`users-email-${index}`}
                                   />
-                                  <ErrorMessage name={`users.${index}.email`} />
+                                  <StyledErrorMessage>
+                                    <ErrorMessage
+                                      name={`users.${index}.email`}
+                                    />
+                                  </StyledErrorMessage>
                                 </div>
 
                                 <div>
@@ -95,13 +111,13 @@ const MemberForm: FC = () => {
                                   <ErrorMessage name={`users.${index}.role`} />
                                 </div>
                                 <div>
-                                  <button
+                                  <StyledButton
                                     type="button"
                                     onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
                                     data-testid={`remove-button-${index}`}
                                   >
                                     <Icon icon={faTrash} />
-                                  </button>{" "}
+                                  </StyledButton>{" "}
                                 </div>
                               </StyledContainer>
                             </StyledWrapper>
