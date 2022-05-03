@@ -16,11 +16,12 @@ const Input: FC<InputProps> = ({
   field,
   form: { touched, errors },
   label,
+  id,
   ...props
 }) => (
   <div>
     <Label htmlFor={label} label={label}></Label>
-    <StyledInput type="text" {...field} {...props} />
+    <StyledInput type="text" {...field} {...props} data-testid={id} />
     {touched[field.name] && errors[field.name] && (
       <div className="error">{errors[field.name]}</div>
     )}

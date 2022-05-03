@@ -3,4 +3,5 @@ export default interface InputProps {
   form: any;
   label?: string;
   options?: string[];
+  id?: string;
 }

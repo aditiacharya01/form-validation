@@ -2,7 +2,7 @@ import * as Yup from "yup";
 
 import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import Select from "../atoms/Select";
 import Input from "../atoms/Input";
 import { roles } from "../constants/UserConstant";
@@ -23,6 +23,7 @@ const StyledContainer = styled.div`
 
 const MemberForm: FC = () => {
   const dispatch = useAppDispatch();
+  const [addedState, setAddedState] = useState("");
 
   return (
     <div>
@@ -47,13 +48,13 @@ const MemberForm: FC = () => {
                   .oneOf(roles, "The role you chose does not exist"),
               })
             )
-            .min(1, "Minimum of 1 memeber"),
+            .min(1, "At least one member is required"),
         })}
         onSubmit={(values: any) => {
           dispatch(inviteUsers(values));
-          alert(JSON.stringify(values));
+          setAddedState("Successfully added member");
         }}
-        render={({ values, errors }) => (
+        render={({ values, errors }: any) => (
           <Form>
             <h5>Form </h5>
             <FieldArray
@@ -72,6 +73,7 @@ const MemberForm: FC = () => {
                                   name={`users.${index}.email`}
                                   component={Input}
                                   label="Email"
+                                  id={`users-email-${index}`}
                                 />
                                 <ErrorMessage name={`users.${index}.email`} />
 
@@ -82,6 +84,7 @@ const MemberForm: FC = () => {
                                   component={Select}
                                   options={roles}
                                   label="Role"
+                                  id={`users-role-${index}`}
                                 />
                                 <ErrorMessage name={`users.${index}.role`} />
                                 <br />
@@ -89,6 +92,7 @@ const MemberForm: FC = () => {
                                 <button
                                   type="button"
                                   onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                                  data-testid={`remove-button-${index}`}
                                 >
                                   -
                                 </button>
@@ -107,6 +111,7 @@ const MemberForm: FC = () => {
                           email: "",
                         })
                       }
+                      data-testid="add-button"
                     >
                       Add Member
                     </button>
@@ -114,8 +119,12 @@ const MemberForm: FC = () => {
                     <br />
                     <br />
                     <div>
-                      <button type="submit">Invite Members</button>
+                      <button type="submit" data-testid="submit-button">
+                        Invite Members
+                      </button>
                     </div>
+
+                    <div>{errors.users}</div>
                   </div>
                 );
               }}
@@ -124,6 +133,7 @@ const MemberForm: FC = () => {
           </Form>
         )}
       />
+      {addedState}
     </div>
   );
 };

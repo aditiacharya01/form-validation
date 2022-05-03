@@ -17,13 +17,14 @@ const Select: FC<InputProps> = ({
   form: { touched, errors },
   options,
   label,
+  id,
   ...props
 }) => (
   <div>
     <Label htmlFor={label} label={label}></Label>
-    <StyledSelect {...field} {...props}>
+    <StyledSelect {...field} {...props} data-testid={id}>
       {options?.map((item: string, index: number) => (
-        <option key={index} value={item}>
+        <option key={index} value={item} data-testid={`${id}-option`}>
           {item}
         </option>
       ))}
