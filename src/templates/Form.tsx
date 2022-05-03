@@ -6,8 +6,12 @@ import React, { FC } from "react";
 import Select from "../atoms/Select";
 import Input from "../atoms/Input";
 import { roles } from "../constants/UserConstant";
+import { useAppDispatch } from "../hooks/user.hooks";
+import { inviteUsers } from "../store/user-actions";
 
 const MemberForm: FC = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <div>
       <Formik
@@ -34,6 +38,7 @@ const MemberForm: FC = () => {
             .min(1, "Minimum of 1 memeber"),
         })}
         onSubmit={(values: any) => {
+          dispatch(inviteUsers(values));
           alert(JSON.stringify(values));
         }}
         render={({ values, errors }) => (
