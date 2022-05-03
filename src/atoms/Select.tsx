@@ -5,7 +5,6 @@ import Label from "./Label";
 
 const StyledSelect = styled.select<InputProps>`
   height: 30px;
-  width: 300px;
   border-radius: 4px;
   background-color: #fff;
   border: 1px solid #d8cccc;

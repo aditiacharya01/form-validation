@@ -20,7 +20,9 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 360px 150px 80px;
+  text-align: left;
 `;
 
 const MemberForm: FC = () => {
@@ -70,34 +72,37 @@ const MemberForm: FC = () => {
                           <div key={index}>
                             <StyledWrapper>
                               <StyledContainer>
-                                <Field
-                                  placeholder="user email"
-                                  name={`users.${index}.email`}
-                                  component={Input}
-                                  label="Email"
-                                  id={`users-email-${index}`}
-                                />
-                                <ErrorMessage name={`users.${index}.email`} />
+                                <div>
+                                  <Field
+                                    placeholder="user email"
+                                    name={`users.${index}.email`}
+                                    component={Input}
+                                    label="Email"
+                                    id={`users-email-${index}`}
+                                  />
+                                  <ErrorMessage name={`users.${index}.email`} />
+                                </div>
 
-                                <br />
-                                <Field
-                                  placeholder="user role"
-                                  name={`users.${index}.role`}
-                                  component={Select}
-                                  options={roles}
-                                  label="Role"
-                                  id={`users-role-${index}`}
-                                />
-                                <ErrorMessage name={`users.${index}.role`} />
-                                <br />
-
-                                <button
-                                  type="button"
-                                  onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
-                                  data-testid={`remove-button-${index}`}
-                                >
-                                  <Icon icon={faTrash} />
-                                </button>
+                                <div>
+                                  <Field
+                                    placeholder="user role"
+                                    name={`users.${index}.role`}
+                                    component={Select}
+                                    options={roles}
+                                    label="Role"
+                                    id={`users-role-${index}`}
+                                  />
+                                  <ErrorMessage name={`users.${index}.role`} />
+                                </div>
+                                <div>
+                                  <button
+                                    type="button"
+                                    onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                                    data-testid={`remove-button-${index}`}
+                                  >
+                                    <Icon icon={faTrash} />
+                                  </button>{" "}
+                                </div>
                               </StyledContainer>
                             </StyledWrapper>
                             <br />
@@ -126,7 +131,7 @@ const MemberForm: FC = () => {
                       </button>
                     </div>
 
-                    <div>{errors.users}</div>
+                    {/* <div>{errors.users}</div> */}
                   </div>
                 );
               }}
