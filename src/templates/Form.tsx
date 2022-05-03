@@ -10,8 +10,14 @@ import { useAppDispatch } from "../hooks/user.hooks";
 import { inviteUsers } from "../store/user-actions";
 import styled from "styled-components";
 
+const StyledWrapper = styled.div`
+  margin: auto;
+  width: 50%;
+  background: #f7f7f7;
+  padding: 10px;
+`;
+
 const StyledContainer = styled.div`
-  background-color: #ff8;
   display: flex;
 `;
 
@@ -59,33 +65,35 @@ const MemberForm: FC = () => {
                     {users && users.length > 0
                       ? users.map((user: any, index: number) => (
                           <div key={index}>
-                            <StyledContainer>
-                              <Field
-                                placeholder="user email"
-                                name={`users.${index}.email`}
-                                component={Input}
-                                label="Email"
-                              />
-                              <ErrorMessage name={`users.${index}.email`} />
+                            <StyledWrapper>
+                              <StyledContainer>
+                                <Field
+                                  placeholder="user email"
+                                  name={`users.${index}.email`}
+                                  component={Input}
+                                  label="Email"
+                                />
+                                <ErrorMessage name={`users.${index}.email`} />
 
-                              <br />
-                              <Field
-                                placeholder="user role"
-                                name={`users.${index}.role`}
-                                component={Select}
-                                options={roles}
-                                label="Role"
-                              />
-                              <ErrorMessage name={`users.${index}.role`} />
-                              <br />
+                                <br />
+                                <Field
+                                  placeholder="user role"
+                                  name={`users.${index}.role`}
+                                  component={Select}
+                                  options={roles}
+                                  label="Role"
+                                />
+                                <ErrorMessage name={`users.${index}.role`} />
+                                <br />
 
-                              <button
-                                type="button"
-                                onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
-                              >
-                                -
-                              </button>
-                            </StyledContainer>
+                                <button
+                                  type="button"
+                                  onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                                >
+                                  -
+                                </button>
+                              </StyledContainer>
+                            </StyledWrapper>
                             <br />
                             <br />
                           </div>
