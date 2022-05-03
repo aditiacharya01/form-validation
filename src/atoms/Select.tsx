@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 import InputProps from "../interfaces/Input.types";
+import Label from "./Label";
 
 const StyledSelect = styled.select<InputProps>`
   height: 30px;
@@ -15,9 +16,11 @@ const Select: FC<InputProps> = ({
   field,
   form: { touched, errors },
   options,
+  label,
   ...props
 }) => (
   <div>
+    <Label htmlFor={label} label={label}></Label>
     <StyledSelect {...field} {...props}>
       {options?.map((item: string, index: number) => (
         <option key={index} value={item}>

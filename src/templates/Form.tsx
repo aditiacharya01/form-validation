@@ -8,6 +8,12 @@ import Input from "../atoms/Input";
 import { roles } from "../constants/UserConstant";
 import { useAppDispatch } from "../hooks/user.hooks";
 import { inviteUsers } from "../store/user-actions";
+import styled from "styled-components";
+
+const StyledContainer = styled.div`
+  background-color: #ff8;
+  display: flex;
+`;
 
 const MemberForm: FC = () => {
   const dispatch = useAppDispatch();
@@ -53,29 +59,33 @@ const MemberForm: FC = () => {
                     {users && users.length > 0
                       ? users.map((user: any, index: number) => (
                           <div key={index}>
-                            <Field
-                              placeholder="user email"
-                              name={`users.${index}.email`}
-                              component={Input}
-                            />
-                            <ErrorMessage name={`users.${index}.email`} />
+                            <StyledContainer>
+                              <Field
+                                placeholder="user email"
+                                name={`users.${index}.email`}
+                                component={Input}
+                                label="Email"
+                              />
+                              <ErrorMessage name={`users.${index}.email`} />
 
-                            <br />
-                            <Field
-                              placeholder="user role"
-                              name={`users.${index}.role`}
-                              component={Select}
-                              options={roles}
-                            />
-                            <ErrorMessage name={`users.${index}.role`} />
-                            <br />
+                              <br />
+                              <Field
+                                placeholder="user role"
+                                name={`users.${index}.role`}
+                                component={Select}
+                                options={roles}
+                                label="Role"
+                              />
+                              <ErrorMessage name={`users.${index}.role`} />
+                              <br />
 
-                            <button
-                              type="button"
-                              onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
-                            >
-                              -
-                            </button>
+                              <button
+                                type="button"
+                                onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                              >
+                                -
+                              </button>
+                            </StyledContainer>
                             <br />
                             <br />
                           </div>
