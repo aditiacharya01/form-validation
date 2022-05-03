@@ -99,6 +99,10 @@ const MemberForm: FC = () => {
         onSubmit={(values: any) => {
           dispatch(inviteUsers(values));
           setAddedState("Successfully added member");
+
+          setTimeout(() => {
+            setAddedState("");
+          }, 3000);
         }}
         render={({ values, errors }: any) => (
           <Form>
@@ -201,7 +205,7 @@ const MemberForm: FC = () => {
           </Form>
         )}
       />
-      {addedState}
+      {addedState !== "" && addedState}
     </div>
   );
 };
