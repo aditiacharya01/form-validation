@@ -41,7 +41,9 @@ const MemberForm: FC = () => {
   const dispatch = useAppDispatch();
   const formRef = useRef<any>();
   const [addedState, setAddedState] = useState("");
-  const [userArray, setuserArray] = useState<{ email: string; role: number }[]>([]);
+  const [userArray, setuserArray] = useState<{ email: string; role: number }[]>(
+    []
+  );
 
   return (
     <div>
@@ -134,7 +136,11 @@ const MemberForm: FC = () => {
                                     label="Role"
                                     id={`users-role-${index}`}
                                   />
-                                  <ErrorMessage name={`users.${index}.role`} />
+                                  <StyledErrorMessage>
+                                    <ErrorMessage
+                                      name={`users.${index}.role`}
+                                    />{" "}
+                                  </StyledErrorMessage>
                                 </div>
                                 <div>
                                   <StyledButton
