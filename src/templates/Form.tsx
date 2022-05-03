@@ -2,7 +2,7 @@ import * as Yup from "yup";
 
 import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 
-import React, { FC, useState } from "react";
+import React, { FC, useRef, useState } from "react";
 import Select from "../atoms/Select";
 import Input from "../atoms/Input";
 import { roles } from "../constants/UserConstant";
@@ -39,16 +39,19 @@ const StyledErrorMessage = styled.div`
 
 const MemberForm: FC = () => {
   const dispatch = useAppDispatch();
+  const formRef = useRef<any>();
   const [addedState, setAddedState] = useState("");
+  const [userArray, setuserArray] = useState<{ email: string; role: number }[]>([]);
 
   return (
     <div>
       <Formik
+        innerRef={formRef}
         initialValues={{
           users: [
             {
-              email: "aditi@email.com",
-              role: "Manager",
+              email: "",
+              role: "",
             },
           ],
         }}
@@ -58,7 +61,30 @@ const MemberForm: FC = () => {
               Yup.object().shape({
                 email: Yup.string()
                   .required("Field can't be empty")
-                  .email("Enter valid email"),
+                  .email("Enter valid email")
+                  .test(
+                    "validator-custom-name",
+                    (value: any, { createError, path }) => {
+                      let errIndex: string[] = [];
+
+                      userArray.forEach((user: any, index) => {
+                        if (user.email === value) {
+                          errIndex.push(`users[${index + 1}].email`);
+                        }
+                      });
+
+                      const filteredPath = errIndex.filter(
+                        (err) => err === path
+                      );
+
+                      if (filteredPath.length > 0)
+                        return createError({
+                          path: filteredPath[0],
+                          message: "Email already exists",
+                        });
+                      return true;
+                    }
+                  ),
                 role: Yup.string()
                   .required("Field can't be empty")
                   .oneOf(roles, "The role you chose does not exist"),
@@ -128,12 +154,13 @@ const MemberForm: FC = () => {
                       : null}
                     <button
                       type="button"
-                      onClick={() =>
+                      onClick={() => {
                         arrayHelpers.push({
                           name: "",
                           email: "",
-                        })
-                      }
+                        });
+                        setuserArray(users);
+                      }}
                       data-testid="add-button"
                     >
                       Add Member
