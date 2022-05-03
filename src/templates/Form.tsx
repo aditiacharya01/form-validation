@@ -9,14 +9,16 @@ import { roles } from "../constants/UserConstant";
 import { useAppDispatch } from "../hooks/user.hooks";
 import { inviteUsers } from "../store/user-actions";
 import styled from "styled-components";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 import Icon from "../atoms/Icon";
+import Button from "../atoms/Buttons";
 
 const StyledWrapper = styled.div`
   margin: auto;
-  width: 50%;
+  width: 29%;
   background: #f7f7f7;
-  padding: 10px;
+  padding: 29px;
+  border-radius: 4px;
 `;
 
 const StyledContainer = styled.div`
@@ -105,12 +107,14 @@ const MemberForm: FC = () => {
               name="users"
               render={(arrayHelpers: any) => {
                 const users = values.users;
+                console.log("error", errors.users);
+
                 return (
                   <div>
-                    {users && users.length > 0
-                      ? users.map((user: any, index: number) => (
-                          <div key={index}>
-                            <StyledWrapper>
+                    <StyledWrapper>
+                      {users && users.length > 0
+                        ? users.map((user: any, index: number) => (
+                            <div key={index}>
                               <StyledContainer>
                                 <div>
                                   <Field
@@ -145,42 +149,50 @@ const MemberForm: FC = () => {
                                 <div>
                                   <StyledButton
                                     type="button"
-                                    onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                                    onClick={() => {
+                                      if (index === 0) {
+                                        alert(
+                                          "At lease one member should be present"
+                                        );
+                                      } else {
+                                        arrayHelpers.remove(index);
+                                      }
+                                    }}
                                     data-testid={`remove-button-${index}`}
                                   >
                                     <Icon icon={faTrash} />
                                   </StyledButton>{" "}
                                 </div>
                               </StyledContainer>
-                            </StyledWrapper>
-                            <br />
-                            <br />
-                          </div>
-                        ))
-                      : null}
-                    <button
-                      type="button"
-                      onClick={() => {
-                        arrayHelpers.push({
-                          name: "",
-                          email: "",
-                        });
-                        setuserArray(users);
-                      }}
-                      data-testid="add-button"
-                    >
-                      Add Member
-                    </button>
-                    <br />
-                    <br />
-                    <br />
-                    <div>
-                      <button type="submit" data-testid="submit-button">
-                        Invite Members
-                      </button>
-                    </div>
 
-                    {/* <div>{errors.users}</div> */}
+                              <br />
+                              <br />
+                            </div>
+                          ))
+                        : null}
+                      <Button
+                        type="button"
+                        onClick={() => {
+                          arrayHelpers.push({
+                            name: "",
+                            email: "",
+                          });
+                          setuserArray(users);
+                        }}
+                        id="add-button"
+                        name="Add another"
+                        icon="+"
+                        buttonType="secondary"
+                      ></Button>
+                      <div>
+                        <Button
+                          type="submit"
+                          id="submit-button"
+                          name="INVITE MEMBERS"
+                          buttonType="primary"
+                        ></Button>
+                      </div>
+                    </StyledWrapper>
                   </div>
                 );
               }}

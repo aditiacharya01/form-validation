@@ -4,7 +4,7 @@ import InputProps from "../interfaces/Input.types";
 import Label from "./Label";
 
 const StyledSelect = styled.select<InputProps>`
-  height: 30px;
+  height: 34px;
   border-radius: 4px;
   background-color: #fff;
   border: 1px solid #d8cccc;
