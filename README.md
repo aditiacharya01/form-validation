@@ -1,6 +1,13 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The project is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+Packages and Tools  
+1. `Formik` and `Yup` for form validation. 
+2. `Redux-toolkit` for store management. 
+3.  `React testing library` for testing the form. 
+4.  `Styled components` for styling. 
+5.  `Fontawesome` for icons import.  
 
 ## Available Scripts
 
