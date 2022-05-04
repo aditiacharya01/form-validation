@@ -15,7 +15,7 @@ import Button from "../atoms/Buttons";
 
 const StyledWrapper = styled.div`
   margin: auto;
-  width: 29%;
+  width: 50%;
   background: #f7f7f7;
   padding: 29px;
   border-radius: 4px;
@@ -23,7 +23,7 @@ const StyledWrapper = styled.div`
 
 const StyledContainer = styled.div`
   display: grid;
-  grid-template-columns: 360px 150px 80px;
+  grid-template-columns: 60% 30% 10%;
   text-align: left;
 `;
 
@@ -150,7 +150,7 @@ const MemberForm: FC = () => {
                                     />{" "}
                                   </StyledErrorMessage>
                                 </div>
-                                <div>
+                                <div style={{ marginLeft: "auto" }}>
                                   <StyledButton
                                     type="button"
                                     onClick={() => {
